@@ -18,6 +18,9 @@ namespace air_beta4.Controllers
             var cityRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/cities.json");
             List<City> cities = (List<City>)JsonConvert.DeserializeObject(cityRequest, typeof(List<City>));
             cities.Sort((x, y) => x.name.CompareTo(y.name));
+    
+
+
 
             return cities;
         }

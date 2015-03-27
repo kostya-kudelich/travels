@@ -32,9 +32,13 @@ namespace air_beta4.Models
                 }
 
                 bP = new BestProposal(new List<Ticket>(), new List<Hotel>());
-                if (cheapestTickets.list[0].price + temp.list[0].minPriceTotal <= maxPrice)
+                if (cheapestTickets.list.Count > 0)
                 {
-                    bP = new BestProposal(cheapestTickets.list.GetRange(0, ticketsLength), temp.list.GetRange(0, hotelLength));
+
+                    if (cheapestTickets.list[0].price + temp.list[0].minPriceTotal <= maxPrice)
+                    {
+                        bP = new BestProposal(cheapestTickets.list.GetRange(0, ticketsLength), temp.list.GetRange(0, hotelLength));
+                    }
                 }
 
                 ans = (string)JsonConvert.SerializeObject(bP);

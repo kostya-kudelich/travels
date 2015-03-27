@@ -25,6 +25,9 @@ namespace air_beta4.Models
 
             var cityRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/cities.json");
             cities = (List<City>)JsonConvert.DeserializeObject(cityRequest, typeof(List<City>));
+        
+            
+
 
             int originCountryId = 0;
             int destinationCountryId = 0;

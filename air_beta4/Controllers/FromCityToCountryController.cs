@@ -16,11 +16,12 @@ namespace air_beta4.Controllers
 
         public List<CheapestTicketHotel> Get(string originCountry, string originCity, string destinationCountry, string checkIn, string checkOut, int personCount, int maxPrice, string currency)
         {
-    
-            RequestController rq = new RequestController(originCountry, originCity, destinationCountry, null);
-            Request req = new Request(rq.originCountry, rq.originCity, rq.destinationCountry, rq.destinationCity, checkIn, checkOut, rq.countries, rq.cities, personCount, maxPrice, currency);
 
+            RequestController rq = new RequestController(originCountry, originCity, destinationCountry, null);
+
+            Request req = new Request(rq.originCountry, rq.originCity, rq.destinationCountry, rq.destinationCity, checkIn, checkOut, rq.countries, rq.cities, personCount, maxPrice, currency);
             return req.list;
+
 
         }
 

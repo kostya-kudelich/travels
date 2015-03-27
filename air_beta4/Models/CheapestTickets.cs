@@ -8,6 +8,7 @@ using air_beta4.Models;
 using System.Net;
 using System.Web.Helpers;
 using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 
 
@@ -24,14 +25,18 @@ namespace air_beta4.Models
 
             this.api = "http://api.travelpayouts.com/v1/prices/cheap?origin=" + origin + "&destination=" +
                 destination + "&depart_date=" + depart_date + "&return_date=" + return_date + "&token=" + "60be4bd09411cd4664933bd759ba8963" + "&currency=" + currency;
-            string request = new WebClient().DownloadString(api);
 
+            
+            string request = new WebClient().DownloadString(api);
+   
+            
+         
             HotelsRequestResult HRR = (HotelsRequestResult)JsonConvert.DeserializeObject(request, typeof(HotelsRequestResult));
 
-            dynamic tickets = (dynamic)JsonConvert.DeserializeObject(request);
+            //dynamic tickets = (dynamic)JsonConvert.DeserializeObject(request);
 
             JObject d = JObject.Parse(request);
-            Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(request);
+            //Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(request);
 
 
 

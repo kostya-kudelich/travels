@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -46,7 +47,19 @@ namespace air_beta4.Models
             api = "http://engine.hotellook.com/api/v2/search/getResult.json?searchId=" + HRR.searchId + "&sortBy=price&marker=" + marker +
                 "&signature=" + signature;
 
-            var hotelListRequest = new WebClient().DownloadString(api);
+            //var hotelListRequest = new WebClient().DownloadString(api);
+
+            string hotelListRequest = "";
+
+   
+            using (var httpClient = new HttpClient())
+            {
+                var response = httpClient.GetAsync(api).Result;
+                string result = response.Content.ReadAsStringAsync().Result;
+                hotelListRequest = result;
+            }
+            
+
             HotelResult res = (HotelResult)JsonConvert.DeserializeObject(hotelListRequest, typeof(HotelResult));
             list = res.result;
             list.Sort((x, y) => x.minPriceTotal.CompareTo(y.minPriceTotal));
