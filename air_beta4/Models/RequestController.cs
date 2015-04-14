@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,21 +21,38 @@ namespace air_beta4.Models
         public RequestController(string originCountry, string originCity, string destinationCountry, string destinationCity)
         {
 
-            var client = new MongoClient();
-            MongoServer server = client.GetServer();
+            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
+            var url = new MongoUrl(connectionstring);
+            var client = new MongoClient(url);
+            var server = client.GetServer();
+
+            //var client = new MongoClient();
+            //MongoServer server = client.GetServer();
             MongoDatabase db = server.GetDatabase("db");
 
             MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("Cities");
             MongoCollection<Country> countryCollection = (MongoCollection<Country>)db.GetCollection<Country>("Countries");
 
-       /*     var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
+    
+
+            var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
             countries = (List<Country>)JsonConvert.DeserializeObject(countryRequest, typeof(List<Country>));
             countries.Sort((x, y) => x.name.CompareTo(y.name));
 
 
             var cityRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/cities.json");
             cities = (List<City>)JsonConvert.DeserializeObject(cityRequest, typeof(List<City>));
-        */
+
+
+            foreach (Country c in countries)
+            {
+                countryCollection.Insert(c);
+            }
+            foreach (City c in cities)
+            {
+                cityCollection.Insert(c);
+            }
+
 
             MongoCursor<Country> countryCursor= countryCollection.FindAllAs<Country>();
             foreach (var c in countryCursor)
