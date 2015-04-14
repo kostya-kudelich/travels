@@ -1,4 +1,5 @@
 ﻿using air_beta4.Models;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,22 +15,55 @@ namespace air_beta4.Models
     {
         public Country originCountry, destinationCountry;
         public City originCity, destinationCity;
-        public List<Country> countries;
-        public List<City> cities;
+        public List<Country> countries = new List<Country>();
+        public List<City> cities = new List<City>();
         public RequestController(string originCountry, string originCity, string destinationCountry, string destinationCity)
         {
-            var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
+
+            var client = new MongoClient();
+            MongoServer server = client.GetServer();
+            MongoDatabase db = server.GetDatabase("db");
+
+            MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("Cities");
+            MongoCollection<Country> countryCollection = (MongoCollection<Country>)db.GetCollection<Country>("Countries");
+
+       /*     var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
             countries = (List<Country>)JsonConvert.DeserializeObject(countryRequest, typeof(List<Country>));
             countries.Sort((x, y) => x.name.CompareTo(y.name));
 
 
             var cityRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/cities.json");
             cities = (List<City>)JsonConvert.DeserializeObject(cityRequest, typeof(List<City>));
-        
-            
+        */
+
+            MongoCursor<Country> countryCursor= countryCollection.FindAllAs<Country>();
+            foreach (var c in countryCursor)
+            {
+                countries.Add(c);
+            }
+            MongoCursor<City> cityCursor = cityCollection.FindAllAs<City>();
+            foreach (var c in cityCursor)
+            {
+                cities.Add(c);
+            }
 
 
-            int originCountryId = 0;
+            var queryOriginCountry = new QueryDocument("name", originCountry);
+            this.originCountry = countryCollection.FindOne(queryOriginCountry);
+
+            var queryOriginCity = new QueryDocument("name", originCity);
+            this.originCity = cityCollection.FindOne(queryOriginCity);
+
+            var queryDestinationCountry = new QueryDocument("name", destinationCountry);
+            this.destinationCountry = countryCollection.FindOne(queryDestinationCountry);
+
+            if (destinationCity != null)
+            {
+                var queryDestinationCity = new QueryDocument("name", destinationCity);
+                this.destinationCity = cityCollection.FindOne(queryDestinationCity);
+            }
+
+          /*  int originCountryId = 0;
             int destinationCountryId = 0;
             int originCityId = 0;
             int destinationCityId = 0;
@@ -69,6 +103,7 @@ namespace air_beta4.Models
             {
                 this.destinationCity = cities[destinationCityId];
             }
+          */
 
         }
     }
