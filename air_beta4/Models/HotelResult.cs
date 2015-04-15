@@ -14,6 +14,9 @@ namespace air_beta4.Models
         [JsonProperty("result")]
         public List<Hotel> result { get; set; }
 
+        [JsonProperty("errorCode")]
+        public int errorCode { get; set; }
+
 
     }
 }

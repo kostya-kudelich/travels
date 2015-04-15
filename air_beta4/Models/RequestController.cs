@@ -21,13 +21,13 @@ namespace air_beta4.Models
         public RequestController(string originCountry, string originCity, string destinationCountry, string destinationCity)
         {
 
-            var connectionstring = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
-            var url = new MongoUrl(connectionstring);
-            var client = new MongoClient(url);
-            var server = client.GetServer();
+            //var connectionstring = ConfigurationManager.AppSettings.Get("MONGOHQ_URL");
+            //var url = new MongoUrl(connectionstring);
+            //var client = new MongoClient(url);
+            //var server = client.GetServer();
 
-            //var client = new MongoClient();
-            //MongoServer server = client.GetServer();
+            var client = new MongoClient();
+            MongoServer server = client.GetServer();
             MongoDatabase db = server.GetDatabase("db");
 
             MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("Cities");
@@ -35,7 +35,7 @@ namespace air_beta4.Models
 
     
 
-            var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
+         /*   var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
             countries = (List<Country>)JsonConvert.DeserializeObject(countryRequest, typeof(List<Country>));
             countries.Sort((x, y) => x.name.CompareTo(y.name));
 
@@ -52,6 +52,7 @@ namespace air_beta4.Models
             {
                 cityCollection.Insert(c);
             }
+          */
 
 
             MongoCursor<Country> countryCursor= countryCollection.FindAllAs<Country>();

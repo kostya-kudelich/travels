@@ -15,7 +15,7 @@ namespace air_beta4.Models
         public string signature;
         public string marker = "74588";
         public string token = "60be4bd09411cd4664933bd759ba8963";
-        public List<Hotel> list;
+        public List<Hotel> list = new List<Hotel>();
 
         public string ConvertStringtoMD5(string strword)
         {
@@ -51,18 +51,31 @@ namespace air_beta4.Models
 
             string hotelListRequest = "";
 
-   
-            using (var httpClient = new HttpClient())
-            {
-                var response = httpClient.GetAsync(api).Result;
-                string result = response.Content.ReadAsStringAsync().Result;
-                hotelListRequest = result;
-            }
-            
+            bool flag = false;
+            HotelResult res = new HotelResult();
 
-            HotelResult res = (HotelResult)JsonConvert.DeserializeObject(hotelListRequest, typeof(HotelResult));
+            while (!flag)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    flag = true;
+                    var response = httpClient.GetAsync(api).Result;
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    hotelListRequest = result;
+                    res = (HotelResult)JsonConvert.DeserializeObject(hotelListRequest, typeof(HotelResult));
+                    if (res.errorCode == 4)
+                    {
+                        flag = false;
+                        System.Threading.Thread.Sleep(500);
+                    }
+                }
+            }
+
+      
+            //HotelResult res = (HotelResult)JsonConvert.DeserializeObject(hotelListRequest, typeof(HotelResult));
             list = res.result;
             list.Sort((x, y) => x.minPriceTotal.CompareTo(y.minPriceTotal));
+
 
         }
     }
