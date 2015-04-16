@@ -1,5 +1,6 @@
 ﻿using air_beta4.Models;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,8 @@ namespace air_beta4.Models
                 var queryOriginCountry = new QueryDocument("name", originCountry);
                 this.originCountry = countryCollection.FindOne(queryOriginCountry);
 
-                var queryOriginCity = new QueryDocument("name", originCity);
+                //var queryOriginCity = new QueryDocument("name", originCity);
+                var queryOriginCity = Query.And(Query.EQ("name", originCity), Query.EQ("country_code", this.originCountry.code));
                 this.originCity = cityCollection.FindOne(queryOriginCity);
             }
 
@@ -81,7 +83,8 @@ namespace air_beta4.Models
 
             if (destinationCity != null)
             {
-                var queryDestinationCity = new QueryDocument("name", destinationCity);
+                //var queryDestinationCity = new QueryDocument("name", destinationCity);
+                var queryDestinationCity = Query.And(Query.EQ("name", destinationCity), Query.EQ("country_code", this.destinationCountry.code));
                 this.destinationCity = cityCollection.FindOne(queryDestinationCity);
             }
 
