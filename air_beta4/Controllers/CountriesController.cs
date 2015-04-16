@@ -22,12 +22,6 @@ namespace air_beta4.Controllers
         public List<Country> Get()
         {
 
-
-            //var client = new MongoClient();
-            //var db = client.GetDatabase("db");
-            //var collection = db.GetCollection<Country>("Countries");
-
-
           
             var client = new MongoClient();
             MongoServer server = client.GetServer();

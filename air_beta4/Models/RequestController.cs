@@ -66,12 +66,15 @@ namespace air_beta4.Models
                 cities.Add(c);
             }
 
+            if (originCountry != null)
+            {
+                var queryOriginCountry = new QueryDocument("name", originCountry);
+                this.originCountry = countryCollection.FindOne(queryOriginCountry);
 
-            var queryOriginCountry = new QueryDocument("name", originCountry);
-            this.originCountry = countryCollection.FindOne(queryOriginCountry);
+                var queryOriginCity = new QueryDocument("name", originCity);
+                this.originCity = cityCollection.FindOne(queryOriginCity);
+            }
 
-            var queryOriginCity = new QueryDocument("name", originCity);
-            this.originCity = cityCollection.FindOne(queryOriginCity);
 
             var queryDestinationCountry = new QueryDocument("name", destinationCountry);
             this.destinationCountry = countryCollection.FindOne(queryDestinationCountry);
