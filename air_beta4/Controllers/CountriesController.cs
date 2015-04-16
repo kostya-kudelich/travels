@@ -32,8 +32,8 @@ namespace air_beta4.Controllers
             var client = new MongoClient();
             MongoServer server = client.GetServer();
 
-           
-            MongoDatabase db = server.GetDatabase("db");
+
+            MongoDatabase db = server.GetDatabase("travelsDB");
 
             MongoCollection<Country> collection = (MongoCollection<Country>)db.GetCollection<Country>("Countries");
 

@@ -28,14 +28,14 @@ namespace air_beta4.Models
 
             var client = new MongoClient();
             MongoServer server = client.GetServer();
-            MongoDatabase db = server.GetDatabase("db");
+            MongoDatabase db = server.GetDatabase("travelsDB");
 
             MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("Cities");
             MongoCollection<Country> countryCollection = (MongoCollection<Country>)db.GetCollection<Country>("Countries");
 
     
 
-         /*   var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
+            /*var countryRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/countries.json");
             countries = (List<Country>)JsonConvert.DeserializeObject(countryRequest, typeof(List<Country>));
             countries.Sort((x, y) => x.name.CompareTo(y.name));
 

@@ -74,3 +74,9 @@ D:\dotnet\test\air_beta4\air_beta4\bin\MongoDB.Bson.xml
 D:\dotnet\test\air_beta4\air_beta4\bin\MongoDB.Driver.xml
 D:\dotnet\test\air_beta4\air_beta4\bin\MongoDB.Driver.Legacy.dll
 D:\dotnet\test\air_beta4\air_beta4\bin\MongoDB.Driver.Legacy.xml
+D:\dotnet\test\air_beta4\air_beta4\bin\System.Web.dll
+D:\dotnet\test\air_beta4\air_beta4\bin\System.Web.Http.WebHost.dll
+D:\dotnet\test\air_beta4\air_beta4\bin\System.Web.Routing.dll
+D:\dotnet\test\air_beta4\air_beta4\bin\System.Web.Http.WebHost.xml
+D:\dotnet\test\air_beta4\air_beta4\bin\System.Net.Http.Formatting.dll
+D:\dotnet\test\air_beta4\air_beta4\bin\System.Net.Http.Formatting.xml
