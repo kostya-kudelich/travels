@@ -23,7 +23,7 @@ namespace air_beta4.Controllers
             MongoServer server = client.GetServer();
             MongoDatabase db = server.GetDatabase("travelsDB");
 
-            MongoCollection<City> collection = (MongoCollection<City>)db.GetCollection<City>("Cities");
+            MongoCollection<City> collection = (MongoCollection<City>)db.GetCollection<City>("filteredCities");
 
             /*var cityRequest = new WebClient().DownloadString("http://api.travelpayouts.com/data/cities.json");
             List<City> cities = (List<City>)JsonConvert.DeserializeObject(cityRequest, typeof(List<City>));
@@ -39,9 +39,8 @@ namespace air_beta4.Controllers
             {
                 cities.Add(c);
             }
-   
-    
 
+                       
 
 
             return cities;
