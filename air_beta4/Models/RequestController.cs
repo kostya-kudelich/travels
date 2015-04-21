@@ -31,8 +31,8 @@ namespace air_beta4.Models
             MongoServer server = client.GetServer();
             MongoDatabase db = server.GetDatabase("travelsDB");
 
-            MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("Cities");
-            MongoCollection<Country> countryCollection = (MongoCollection<Country>)db.GetCollection<Country>("Countries");
+            MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("filteredCities");
+            MongoCollection<Country> countryCollection = (MongoCollection<Country>)db.GetCollection<Country>("filteredCountries");
 
     
 
