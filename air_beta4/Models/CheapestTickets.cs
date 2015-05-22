@@ -18,13 +18,14 @@ namespace air_beta4.Models
     public class CheapestTickets
     {
         public string api;
+        public string token = "60be4bd09411cd4664933bd759ba8963";
         public List<Ticket> list = new List<Ticket>();
 
-        public CheapestTickets(string origin, string destination, string depart_date, string return_date, string currency)
+        public CheapestTickets(string origin, string destination, string departDate, string returnDate, string currency)
         {
 
             this.api = "http://api.travelpayouts.com/v1/prices/cheap?origin=" + origin + "&destination=" +
-                destination + "&depart_date=" + depart_date + "&return_date=" + return_date + "&token=" + "60be4bd09411cd4664933bd759ba8963" + "&currency=" + currency;
+                destination + "&depart_date=" + departDate + "&return_date=" + returnDate + "&token=" + token + "&currency=" + currency;
 
             
             string request = new WebClient().DownloadString(api);

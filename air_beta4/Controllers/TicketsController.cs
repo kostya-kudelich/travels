@@ -13,10 +13,10 @@ namespace air_beta4.Controllers
     public class TicketsController : ApiController
     {
 
-        public List<Ticket> Get(string originCountry, string originCity, string destinationCountry, string destinationCity, string depart_date, string return_date, string currency)
+        public List<Ticket> Get(string originCountry, string originCity, string destinationCountry, string destinationCity, string departDate, string returnDate, string currency)
         {
             RequestController rq = new RequestController(originCountry, originCity, destinationCountry, destinationCity);
-            CheapestTickets cheapestTickets = new CheapestTickets(rq.originCity.code, rq.destinationCity.code, depart_date, return_date, currency);
+            CheapestTickets cheapestTickets = new CheapestTickets(rq.originCity.code, rq.destinationCity.code, departDate, returnDate, currency);
             return cheapestTickets.list;
         }
 

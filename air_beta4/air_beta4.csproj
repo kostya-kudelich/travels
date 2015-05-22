@@ -195,15 +195,25 @@
     <Compile Include="Controllers\FromCityToCountryController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HotelPricesController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\MonthTicketsController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AllMonthTicketsFromCity.cs" />
+    <Compile Include="Models\MonthTicketsFromCityToCity.cs" />
     <Compile Include="Models\BestProposal.cs" />
     <Compile Include="Models\CheapestTicketHotel.cs" />
     <Compile Include="Models\CheapestTickets.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\CityHotelPrices.cs" />
+    <Compile Include="Models\HotelLocation.cs" />
+    <Compile Include="Models\HotelPrice.cs" />
+    <Compile Include="Models\HotelPricesList.cs" />
+    <Compile Include="Models\MonthTickets.cs" />
+    <Compile Include="Models\MonthTicketsResult.cs" />
     <Compile Include="Models\RequestController.cs" />
     <Compile Include="Models\Coordinates.cs" />
     <Compile Include="Models\Country.cs" />
