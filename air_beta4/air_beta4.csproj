@@ -190,6 +190,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AverageTicketPriceController.cs" />
     <Compile Include="Controllers\CitiesController.cs" />
     <Compile Include="Controllers\FromCityToCityController.cs" />
     <Compile Include="Controllers\FromCityToCountryController.cs" />
@@ -203,6 +204,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AllMonthTicketsFromCity.cs" />
+    <Compile Include="Models\AveragePrice.cs" />
     <Compile Include="Models\MonthTicketsFromCityToCity.cs" />
     <Compile Include="Models\BestProposal.cs" />
     <Compile Include="Models\CheapestTicketHotel.cs" />

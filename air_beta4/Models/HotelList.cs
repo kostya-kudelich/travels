@@ -47,8 +47,6 @@ namespace air_beta4.Models
             api = "http://engine.hotellook.com/api/v2/search/getResult.json?searchId=" + HRR.searchId + "&sortBy=price&marker=" + marker +
                 "&signature=" + signature;
 
-            //var hotelListRequest = new WebClient().DownloadString(api);
-
             string hotelListRequest = "";
 
             bool flag = false;
@@ -71,8 +69,6 @@ namespace air_beta4.Models
                 }
             }
 
-      
-            //HotelResult res = (HotelResult)JsonConvert.DeserializeObject(hotelListRequest, typeof(HotelResult));
             list = res.result;
             list.Sort((x, y) => x.minPriceTotal.CompareTo(y.minPriceTotal));
 

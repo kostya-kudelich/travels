@@ -16,7 +16,5 @@ namespace air_beta4.Models
         public NameTranslations name_translations { get; set; }
         public string country_code { get; set; }
 
-
-
     }
 }

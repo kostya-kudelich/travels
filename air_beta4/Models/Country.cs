@@ -13,9 +13,6 @@ namespace air_beta4.Models
     public class Country
     {
 
-        
-       // public ObjectId id { get; set; }
-
         [JsonProperty("code")]
         public string code { get; set; } // country code
 

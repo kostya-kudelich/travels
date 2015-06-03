@@ -7,16 +7,6 @@ namespace air_beta4.Models
 {
     public class MonthTicketsResult
     {
-        /*public string origin { get; set; }
-        public string destination {get; set; }
-        public int price { get; set; }
-        public int transfers { get; set; }
-        public string airline { get; set; }
-        public string departure_at { get; set; }
-        public string return_at { get; set; }
-        public string source { get; set; }
-        */
-
 
         public string origin;
         public string destination;

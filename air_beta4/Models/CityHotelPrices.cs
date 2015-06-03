@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace air_beta4.Models
+
 {
+    [BsonIgnoreExtraElements]
     public class CityHotelPrices
     {
         public List<List<HotelPrice>> list3;

@@ -26,8 +26,6 @@ namespace air_beta4.Controllers
             MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("filteredCities");
             MongoCursor<City> cityCursor = cityCollection.FindAllAs<City>();
 
-
-
             
             HotelPricesList hotelPrices = new HotelPricesList();
 

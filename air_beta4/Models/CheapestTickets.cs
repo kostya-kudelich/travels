@@ -34,12 +34,8 @@ namespace air_beta4.Models
          
             HotelsRequestResult HRR = (HotelsRequestResult)JsonConvert.DeserializeObject(request, typeof(HotelsRequestResult));
 
-            //dynamic tickets = (dynamic)JsonConvert.DeserializeObject(request);
-
             JObject d = JObject.Parse(request);
-            //Dictionary<string, object> dictionary = JsonConvert.DeserializeObject<Dictionary<string, object>>(request);
-
-
+ 
 
             if (d.SelectToken("data").Count() != 0)
             {
@@ -59,7 +55,6 @@ namespace air_beta4.Models
                     }
 
                 }
-
 
                 list.Sort((x, y) => x.price.CompareTo(y.price));
             }

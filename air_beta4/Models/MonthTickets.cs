@@ -17,12 +17,15 @@ namespace air_beta4.Models
     {
    
         public List<MonthTicketsResult> list = new List<MonthTicketsResult>();
-        public MonthTickets(string origin, string destination, string departDate, string returnDate, string calendarType, int tripDuration, string currency)
+        public MonthTickets(string origin, string destination, string departDate, string currency)
         {
             
             string token = "60be4bd09411cd4664933bd759ba8963";
-            string api = "http://api.travelpayouts.com/v1/prices/calendar?" + origin + "&destination=" +
-                destination + "&depart_date=" + departDate + "&return_date=" + returnDate + "&calendar_type=" + calendarType + "&trip_duration=" + tripDuration + "&token=" + token + "&currency=" + currency;
+           // string api = "http://api.travelpayouts.com/v1/prices/calendar?" + origin + "&destination=" +
+           //     destination + "&depart_date=" + departDate + "&calendar_type=departure_date" + "&token=" + token + "&currency=" + currency;
+
+            string api = "http://api.travelpayouts.com/v1/prices/calendar?depart_date=" + departDate + "&origin=" + origin + "&destination=" + destination +
+                "&calendar_type=departure_date" + "&token=" + token + "&currency=" + currency;
 
             string request = new WebClient().DownloadString(api);
 

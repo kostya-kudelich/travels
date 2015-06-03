@@ -8,16 +8,27 @@ namespace air_beta4.Models
     public class MonthTicketsFromCityToCity
     {
         public string city;
-        public List<MonthTicketsResult> monthTickets3;
-        public List<MonthTicketsResult> monthTickets7;
-        public List<MonthTicketsResult> monthTickets15;
+        public List<MonthTicketsResult> monthTicketsTo, monthTicketsFrom;
+        public double averagePrice; 
 
-        public MonthTicketsFromCityToCity(string city, List<MonthTicketsResult> monthTickets3, List<MonthTicketsResult> monthTickets7, List<MonthTicketsResult> monthTickets15) 
+        private double getAveragePrice(List<MonthTicketsResult> list)
+        {
+            double sum = 0;
+            foreach (MonthTicketsResult c in list)
+            {
+                sum += c.price;
+            }
+            return sum / list.Count;
+        }
+        public MonthTicketsFromCityToCity(string city, List<MonthTicketsResult> monthTicketsTo, List<MonthTicketsResult> monthTicketsFrom) 
         {
             this.city = city;
-            this.monthTickets3 = monthTickets3;
-            this.monthTickets7 = monthTickets7;
-            this.monthTickets15 = monthTickets15;
+            this.monthTicketsTo = monthTicketsTo;
+            this.monthTicketsFrom = monthTicketsFrom;
+          
+            double averagePriceTo = getAveragePrice(monthTicketsTo);
+            double averagePriceFrom = getAveragePrice(monthTicketsFrom);
+            this.averagePrice = averagePriceTo + averagePriceFrom;
         }
     }
 }

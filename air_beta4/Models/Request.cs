@@ -52,7 +52,7 @@ namespace air_beta4.Models
                 List<City> toCities = new List<City>();
                 for (int i = 0; i < cities.Count; i++)
                 {
-                    if (destinationCountry.code == cities[i].country_code)
+                    if (destinationCountry.code.Equals(cities[i].country_code))
                     {
                         toCities.Add(cities[i]);
                     }
@@ -77,10 +77,6 @@ namespace air_beta4.Models
                 }
 
                 ans = (string)JsonConvert.SerializeObject(list);
-
-                //ans = new JavaScriptSerializer().Serialize(list);
-
-
             }
         }
 
