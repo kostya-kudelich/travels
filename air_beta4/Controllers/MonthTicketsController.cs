@@ -17,8 +17,8 @@ namespace air_beta4.Controllers
     public class MonthTicketsController : ApiController
     {
 
-        public int Get(string originCountry, string originCity, string destinationCountry, string destinationCity, string departDate,
-            string returnDate, int tripDuration)
+        public MonthTicketsFromCityToCity Get(string originCity, string destinationCity, string departDate,
+            string returnDate)
         {
 
 
@@ -34,56 +34,61 @@ namespace air_beta4.Controllers
             string[] originCities = new string[] { "MOW", "LED", "OVB", "SVX", "KZN", "KUF" };
             string[] originCitiesNames = new string[] { "Moscow", "Saint Petersburg", "Novosibirsk", "Ekaterinburg", "Kazan", "Samara" };
 
-            
+
+            /*     for (int i = 0; i < originCities.Length; i++)
+                 {
+                     List<MonthTicketsFromCityToCity> tickets = new List<MonthTicketsFromCityToCity>();
+
+                     foreach (City c in cityCursor)
+                     {
+                         if (!c.code.Equals(originCities[i]))
+                         {
+                             MonthTickets ticketsTo = new MonthTickets(originCities[i], c.code, "2015-06", "USD");
+                             MonthTickets ticketsFrom = new MonthTickets(c.code, originCities[i], "2015-06", "USD");
 
 
-            for (int i = 0; i < originCities.Length; i++)
-            {
-                List<MonthTicketsFromCityToCity> tickets = new List<MonthTicketsFromCityToCity>();
-
-                foreach (City c in cityCursor)
-                {
-                    if (!c.code.Equals(originCities[i]))
-                    {
-                        MonthTickets ticketsTo = new MonthTickets(originCities[i], c.code, "2015-06", "USD");
-                        MonthTickets ticketsFrom = new MonthTickets(c.code, originCities[i], "2015-06", "USD");
-
-
-                        MonthTicketsFromCityToCity mt = new MonthTicketsFromCityToCity(c.name, ticketsTo.list, ticketsFrom.list);
-                        if (ticketsFrom.list.Count != 0 && ticketsTo.list.Count != 0)
-                        {
-                            tickets.Add(mt);
-                        }
+                             MonthTicketsFromCityToCity mt = new MonthTicketsFromCityToCity(c.name, ticketsTo.list, ticketsFrom.list);
+                             if (ticketsFrom.list.Count != 0 && ticketsTo.list.Count != 0)
+                             {
+                                 tickets.Add(mt);
+                             }
                      
+                         }
+                     }
+                     AllMonthTicketsFromCity almt = new AllMonthTicketsFromCity(originCitiesNames[i], tickets);
+                     MongoCollection<AllMonthTicketsFromCity> collection = (MongoCollection<AllMonthTicketsFromCity>)db.GetCollection<AllMonthTicketsFromCity>("allMonthTicketsFromCity");
+                     collection.Insert<AllMonthTicketsFromCity>(almt);
+
+                 }
+            
+     */
+            MongoCollection<AllMonthTicketsFromCity> collection = (MongoCollection<AllMonthTicketsFromCity>)db.GetCollection<AllMonthTicketsFromCity>("allMonthTicketsFromCity");
+            MongoCursor<AllMonthTicketsFromCity> cursor = collection.FindAllAs<AllMonthTicketsFromCity>();
+
+
+            MonthTicketsFromCityToCity ans = new MonthTicketsFromCityToCity("", new List<MonthTicketsResult>(), new List<MonthTicketsResult>());
+
+
+
+            foreach (AllMonthTicketsFromCity mt in cursor)
+            {
+                if (mt.city.Equals(originCity))
+                {
+                    foreach (MonthTicketsFromCityToCity c in mt.tickets)
+                    {
+                        if (c.city.Equals(destinationCity))
+                        {
+                            ans = c;
+                        }
                     }
                 }
-                AllMonthTicketsFromCity almt = new AllMonthTicketsFromCity(originCitiesNames[i], tickets);
-                MongoCollection<AllMonthTicketsFromCity> collection = (MongoCollection<AllMonthTicketsFromCity>)db.GetCollection<AllMonthTicketsFromCity>("allMonthTicketsFromCity");
-                collection.Insert<AllMonthTicketsFromCity>(almt);
-
-            }
-            
-
-
-
-            
-            MongoCollection<AllMonthTicketsFromCity> col = (MongoCollection<AllMonthTicketsFromCity>)db.GetCollection<AllMonthTicketsFromCity>("allMonthTicketsFromCity");
-
-            MongoCursor<AllMonthTicketsFromCity> cursor = col.FindAllAs<AllMonthTicketsFromCity>();
-
-            foreach (AllMonthTicketsFromCity c in cursor)
-            {
-                AllMonthTicketsFromCity aaa = c;
-                int aaaa = 1;
             }
 
 
-            
-            /*var query = Query.Matches("city", originCity);
-            AllMonthTicketsFromCity aaa = (AllMonthTicketsFromCity)collection.FindOne(query);
-            */
 
-            return 5;
+            return ans;            
+
+
         }
     }
 }

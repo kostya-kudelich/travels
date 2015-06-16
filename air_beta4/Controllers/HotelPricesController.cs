@@ -23,13 +23,31 @@ namespace air_beta4.Controllers
             MongoServer server = client.GetServer();
             MongoDatabase db = server.GetDatabase("travelsDB");
 
-            MongoCollection<City> cityCollection = (MongoCollection<City>)db.GetCollection<City>("filteredCities");
-            MongoCursor<City> cityCursor = cityCollection.FindAllAs<City>();
+            MongoCollection<CityHotelPrices> collection = (MongoCollection<CityHotelPrices>)db.GetCollection<CityHotelPrices>("hotelPrices");
+            MongoCursor<CityHotelPrices> cursor = collection.FindAllAs<CityHotelPrices>();
 
             
-            HotelPricesList hotelPrices = new HotelPricesList();
+            List<CityHotelPrices> prices = new List<CityHotelPrices>();
 
-            return hotelPrices.list;
+            foreach (CityHotelPrices c in cursor)
+            {
+                prices.Add(c);
+            }
+
+            List<CityHotelPrices> sortedList = prices.OrderBy(x => x.city).ToList();
+
+            MongoCollection<CityHotelPrices> sortedCollection = (MongoCollection<CityHotelPrices>)db.GetCollection<CityHotelPrices>("sortedHotelPrices");
+
+            foreach (CityHotelPrices c in sortedList)
+            {
+                sortedCollection.Insert<CityHotelPrices>(c);
+            }
+            
+
+      
+            int a;
+
+            return sortedList;
         }
 
     }

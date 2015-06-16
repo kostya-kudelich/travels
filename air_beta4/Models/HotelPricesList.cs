@@ -32,12 +32,12 @@ namespace air_beta4.Models
 
 
 
-            int ff = 0;
+           /* int ff = 0;
             foreach (City c in cityCursor)
             {
 
                 ff++;
-                if (ff > 9)
+                if (ff > 107)
                 {
 
                     DateTime dateCheckIn = new DateTime(2015, 6, 1);
@@ -92,12 +92,14 @@ namespace air_beta4.Models
 
 
             }
+             
+            */
 
-            /*   foreach (CityHotelPrices chp in list)
+               foreach (CityHotelPrices chp in list)
                {
                    hotelPrices.Insert<CityHotelPrices>(chp);
                }
-               */
+               
 
 
 

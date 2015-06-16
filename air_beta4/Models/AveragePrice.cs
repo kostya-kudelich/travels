@@ -1,19 +1,20 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace air_beta4.Models
 {
-
+    [BsonIgnoreExtraElements]
     public class AveragePrice
     {
         public class Info
         {
             public string city;
             public double hotelPrice, ticketPrice, fullPrice;
-  
-            public Info(string city, double ticketPrice) 
+
+            public Info(string city, double ticketPrice)
             {
                 this.city = city;
                 this.ticketPrice = ticketPrice;
@@ -24,7 +25,7 @@ namespace air_beta4.Models
         public List<Info> info;
         public string city;
 
-        public AveragePrice(string city) 
+        public AveragePrice(string city)
         {
             this.city = city;
             info = new List<Info>();
